@@ -10,15 +10,17 @@ export default new Vuex.Store({
       email: '',
       password: '',
       dblpass: ''
-    }
+    },
+    forms: []
   },
   mutations: {
-    increment (state) {
-      state.count++
+    addNewForm (state, newval) {
+      state.forms.push(newval)
     }
   },
   actions: {
-    increment (context) {
+    pushFormsToLocalStorage (context, obj) {
+      localStorage.setItem('arrayOfForms', JSON.stringify(obj))
       context.commit('increment')
     }
   }

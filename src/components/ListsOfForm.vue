@@ -8,19 +8,19 @@
 
 <script>
 export default {
-  name: 'home',
+  name: 'ListsOfForm',
   data () {
     return {
       
     }
   },
   methods: {
-    goCreate(){
-      this.$router.push( {path:'/Create'})
-    },
-    goHome(){
-      this.$router.push( {path:'/'})
-    },
+    // goCreate(){
+    //   this.$router.push( {path:'/Create'})
+    // },
+    // goHome(){
+    //   this.$router.push( {path:'/'})
+    // },
 
   }
 }
