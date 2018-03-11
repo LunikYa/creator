@@ -1,18 +1,22 @@
 <template>
   <div>
-  <div v-for="(item, index) in getArr">
-  {{item.title}}
-  </div>
+  <div v-for="item in this.$root.$store.state.forms">
+      <CreateShow :form="item"/>
+    </div>
   </div>
 </template>
 
 <script>
+import CreateShow from '../components/CreateShow.vue'
 export default {
   name: 'ListsOfForm',
   data () {
     return {
       
     }
+  },
+  components:{
+    CreateShow
   },
   methods: {
     // goCreate(){
@@ -27,6 +31,10 @@ export default {
     getArr(){
       return this.$root.$store.state.forms
     }
+  },
+  created: function(){
+    console.log(this.$root.$store.state.forms);
+    this.$root.$store.dispatch('pullForms')
   }
 }
 </script>

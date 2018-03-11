@@ -60,12 +60,19 @@
       </div>
 
       <div v-for="(item, index) in newForm.questions">
-        <label for=""> You question
-        <input type="text" placeholder="Question" v-model="item.question" class="default-input"></label><br/>
+        <label for=""> You question (type {{item.type}})
+        <input type="text" placeholder="Question" v-model="item.question" class="default-input"></label> <button @click="removeQuestion(index)">del</button><br/>
+            <!-- <select name="" id="">
+              <option value="" @change="changeType(index, "select")"></option>
+              <option value=""></option>
+              <option value=""></option>
+            </select>  -->
        
         <div v-for="(option, num) in item.options">
          <label > <!-- {{option}}  --> 
             <input type="text" placeholder="New option" v-model="item.options[num]" class="default-input" @keyup.13 = "createOption(index)">
+            <button @click="removeOption(index, num)">del</button>
+            
         </label>
         </div>
         <button @click="createOption(index)">Add option</button>
@@ -109,9 +116,9 @@ export default {
     },
     sendForm(){
       // this.$root.$store.commit('pullForms',)
-      this.$root.$store.commit('addNewForm', this.newForm)
-      
-      console.log(this.$root.$store.state.forms[1]);
+      // this.$root.$store.commit('addNewForm', this.newForm)
+      this.$root.$store.dispatch('pushFormsToData', this.newForm)
+      console.log(this.$root.$store.state.forms);
       // console.log(localStorage.arrayOfForms);
     },
 
@@ -123,8 +130,18 @@ export default {
       this.newForm.questions[index].options.push("")
     },
 
-    currentType(type){
-      return this.newForm.questions
+    removeQuestion(index){
+      this.newForm.questions.splice(index, 1)
+      // console.log(index)
+    },
+
+    removeOption(index, num){
+      this.newForm.questions[index].options.splice(num, 1)
+    },
+
+    changeType(index, newType){
+      this.newForm.questions[index].type = newType
+      console.log(newType);
     }
   },
 

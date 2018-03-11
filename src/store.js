@@ -2,7 +2,7 @@ import Vue from 'vue'
 import Vuex from 'vuex'
 
 Vue.use(Vuex)
-
+// var usersRef = firebase.database()
 export default new Vuex.Store({
   state: {
     count: 0,
@@ -13,23 +13,40 @@ export default new Vuex.Store({
     },
     forms: []
   },
+
   mutations: {
     addNewForm (state, newval) {
-      state.forms.push(newval)
+      for(let key in newval){
+        state.forms.push(newval[key])
+      }
     },
-    pullForms(state, newval){
-      state.forms.push((JSON.parse(newval)))
-    }
+    
   },
   actions: {
-    // pushFormsToLocalStorage (context, obj) {
-    //   localStorage.setItem('arrayOfForms', JSON.stringify(obj))
-    // },
-
+    pushFormsToData(context, obj) {
+      // localStorage.setItem('arrayOfForms', JSON.stringify(obj))
+       firebase.database().ref('forms/' + obj.title).set({
+        title: obj.title,
+        discription: obj.discription,
+        questions: obj.questions
+      }).then(resolve =>{
+        console.log("SDsdsdsds");
+       firebase.database().ref('forms/' + obj.title).on('value', function(snapshot){
+        context.commit('addNewForm', snapshot.val())
+       })
+        
+      })
+    },
+    pullForms(context, newval){
+      firebase.database().ref('forms/').on('value', function(snapshot){
+        console.log(snapshot.val());
+        context.commit('addNewForm', snapshot.val())
+    })
+  }
+  }
     // pullFormsFromLocalStorage (context, nameKey) {
     //   return localStorage.nameKey
     // }
-  }
 })
 
 // currentPopap:'',

@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import Create from '../components/Create.vue'
-import CreateShow from '../components/CreateShow.vue'
+import ListOfForm from '../components/ListsOfForm.vue'
 Vue.use(Router)
 
 export default new Router({
@@ -10,7 +10,7 @@ export default new Router({
 		{
       path: '/',
       name: 'Home',
-      component: CreateShow
+      component: ListOfForm
     },
   	{
       path: '/create',
