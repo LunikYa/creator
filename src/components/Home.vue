@@ -2,17 +2,24 @@
   <div>
     <button @click="goCreate">Create new form</button>
     <button @click="goHome">Home</button>
+    
     <router-view/>
   </div>
+  
 </template>
 
 <script>
+import CreateShow from '../components/CreateShow.vue'
 export default {
+
   name: 'home',
   data () {
     return {
       
     }
+  },
+  components:{
+    CreateShow
   },
   methods: {
     goCreate(){

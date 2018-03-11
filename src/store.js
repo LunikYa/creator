@@ -7,7 +7,7 @@ export default new Vuex.Store({
   state: {
     count: 0,
     user: {
-      email: '',
+      email: 'myemail',
       password: '',
       dblpass: ''
     },
@@ -16,44 +16,34 @@ export default new Vuex.Store({
   mutations: {
     addNewForm (state, newval) {
       state.forms.push(newval)
+    },
+    pullForms(state, newval){
+      state.forms.push((JSON.parse(newval)))
     }
   },
   actions: {
-    pushFormsToLocalStorage (context, obj) {
-      localStorage.setItem('arrayOfForms', JSON.stringify(obj))
-      context.commit('increment')
-    }
+    // pushFormsToLocalStorage (context, obj) {
+    //   localStorage.setItem('arrayOfForms', JSON.stringify(obj))
+    // },
+
+    // pullFormsFromLocalStorage (context, nameKey) {
+    //   return localStorage.nameKey
+    // }
   }
 })
 
-// <!--
-// <template>
-// <div id="app">
-//     <start-screen></start-screen>
-//     <img src="./assets/logo.png">
-//     <router-link to="/login">Login</router-link>
-//     <router-link to="/register">Register</router-link>
-//     <router-view ></router-view>
-//   </div>
-// </template>
-
-// <script>
-
-// export default {
-// }
-// </script>
-
-// <style>
-// #app {
-//   font-family: 'Avenir', Helvetica, Arial, sans-serif;
-//   -webkit-font-smoothing: antialiased;
-//   -moz-osx-font-smoothing: grayscale;
-//   text-align: center;
-//   color: #2c3e50;
-// }
-
-// body{
-//     /*background: url("./assets/body-bg.jpg")no-repeat top / cover;*/
-    
-//   }
-// </style>-->
+// currentPopap:'',
+//       bool: false,
+//       countRadio: 1,
+//       newForm:
+//       {
+//         title: '',
+//         discription: '',
+//         questions: [{question: '', options: [], type: this.currentPopap}]
+//         {
+//           str: [], //{questions: '', options: ['','']}
+//           radio: [],
+//           select: []
+//         }
+//       }
+//     }

@@ -1,8 +1,8 @@
 <template>
   <div>
-    <button @click="goCreate">Create new form</button>
-    <button @click="goHome">Home</button>
-    <router-view/>
+  <div v-for="(item, index) in getArr">
+  {{item.title}}
+  </div>
   </div>
 </template>
 
@@ -22,6 +22,11 @@ export default {
     //   this.$router.push( {path:'/'})
     // },
 
+  },
+  computed:{
+    getArr(){
+      return this.$root.$store.state.forms
+    }
   }
 }
 </script>
