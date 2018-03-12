@@ -16,6 +16,7 @@ export default new Vuex.Store({
 
   mutations: {
     addNewForm (state, newval) {
+      state.forms = [];
       for(let key in newval){
         state.forms.push(newval[key])
       }
@@ -25,13 +26,13 @@ export default new Vuex.Store({
   actions: {
     pushFormsToData(context, obj) {
       // localStorage.setItem('arrayOfForms', JSON.stringify(obj))
-       firebase.database().ref('forms/' + obj.title).set({
+       firebase.database().ref('forms/' + obj.title+obj.discription.length).set({
         title: obj.title,
         discription: obj.discription,
         questions: obj.questions
       }).then(resolve =>{
         console.log("SDsdsdsds");
-       firebase.database().ref('forms/' + obj.title).on('value', function(snapshot){
+       firebase.database().ref('forms/').on('value', function(snapshot){
         context.commit('addNewForm', snapshot.val())
        })
         

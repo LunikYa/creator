@@ -1,8 +1,8 @@
 <template>
   <div id="app">
     <TopLine/>
-    <Home/>
-    <!-- <router-view/> -->
+
+   <router-view/>
   </div>
 </template>
 
@@ -18,12 +18,9 @@ export default {
 }
 </script>
 
-<style lang="scss">
-*{
-  padding: 0;
-  margin: 0;
-  outline: none;
-}
+<style lang="scss" scoped>
+@import './components/mixins.scss';
+
 #app {
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
@@ -31,10 +28,6 @@ export default {
   text-align: center;
   color: black;
   margin-top: 60px;
-}
 
-body{
-    // background: url("./assets/body-bg.jpg")no-repeat top / cover;
 }
-
 </style>

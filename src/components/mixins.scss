@@ -1,0 +1,15 @@
+$main-blue: #0076a3;
+$background-blue: #cce4ed;
+$background-grey: #ebebeb;
+
+
+*{
+  padding: 0;
+  margin: 0;
+  outline: none;
+}
+
+body{
+  background-color: $background-blue;
+  height: 100%;
+}
