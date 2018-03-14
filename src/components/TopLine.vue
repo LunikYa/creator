@@ -1,11 +1,10 @@
 <template>
   <div class="top-line">
     <div class="conteiner-go-home" @click="goHome" v-show="showButtons">
-      <img src="../assets/back-home.svg" alt="" >
+      <img src="../assets/back-home.svg" alt="go home">
       <span>Home</span>
     </div>
-    <!-- <button >Home</button> -->
-    <h1>MegaCreator</h1>
+    <h1 class="logo">MegaCreator</h1>
   </div>
 </template>
 
@@ -14,7 +13,7 @@ export default {
   name: 'TopLine',
   data () {
     return {
-      it: ''
+
     }
   },
   methods: {
@@ -31,49 +30,40 @@ export default {
 }
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
 <style lang="scss" scoped>
  @import './mixins.scss';
   .top-line{
     width: 100%;
-    height: 50px;
-    background-color: $main-blue;
+    height: 80px;
+    background-color: $main-black;
     color: white;
     position: fixed;
     z-index: 999;
     top:0;
     left: 0;
-
   }
 
-  h1{
-    font-size: 18px;
-    font-family: Arial;
+  h1.logo{
+    font-size: 25px;
     font-weight: 600px;
-    margin-top: 10px;
+    margin-top: 20px;
   }
-
- 
 
   .conteiner-go-home{
     display: flex;
     justify-content: flex-start;
     align-items: center;
     position: absolute;
-    margin-top: 7px;
+    margin-top: 20px;
     width: 100px;
     opacity: 0.8;
 
     img{
       width: 30px;
       height: 30px;
-      // margin-top: 7px;
-    }
-
-    span{
-
     }
   }
+
   .conteiner-go-home:hover{
     opacity: 1;
     cursor: pointer;

@@ -1,32 +1,25 @@
 <template>
-  <!-- <div class="wrapp"> -->
   <div class="conteiner">
+    ERROR! <br/><br/>
     {{error}}
     <button class="button-back" @click="goOk">BACK</button>
   </div>
- <!-- </div> -->
-
 </template>
 
 <script>
-// import CreateShow from '../components/CreateShow.vue'
 
 export default {
   name: 'ErrorPopap',
   props: ['error'],
-  data () {
-    return {
-     
+  data(){
+    return{
+
     }
   },
   methods:{
     goOk(){
       this.$emit('errorok')
     }
-  },
- 
-  components:{
-    // CreateShow
   },
 }
 </script>
@@ -35,23 +28,30 @@ export default {
   @import './mixins.scss';
   
   .conteiner{
-    width: 300px;
-    height: 300px;
-    background-color: $main-blue;
-    color: white;
-    // margin: 0 auto;
+    width: 350px;
+    height: 350px;
+    background: url('../assets/pop-bg.png') top / cover no-repeat;
+    color: black;
+    font-size: 25px;
     text-align: center;
   }
 
   .button-back{
-    width: 150px;
-    height: 40px;
-    color: $main-blue;
-    background-color: #fff;
+    width: 180px;
+    height: 50px;
     border: none;
-    cursor: pointer;
-    opacity: 0.8;
-    margin: 40px 0px 0px 70px;
-
+    background-color: $main-red;
+    color: white;
+    font-weight: 600;
+    font-size: 16px;
+    transition: all 1s;
+    margin-top: 70px;
+    margin-left: 80px;
+    box-shadow: 0px 5px 10px rgba(0,0,0,0.3);
   }
+
+  .button-back:hover{
+    cursor: pointer;
+  }
+
 </style>

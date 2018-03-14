@@ -1,33 +1,20 @@
 <template>
-
   <div class="conteiner">
-    Congratulation new form added to you list
-    <button class="button-back" @click="goHome">BACK</button>
+    <p class="bold">Congratulation!</p> 
+    <p>form added to you list</p>
+    <button class="button-back" @click="goHome">GO HOME</button>
   </div>
-
- 
-
 </template>
 
 <script>
-// import CreateShow from '../components/CreateShow.vue'
 
 export default {
   name: 'SuccessfulPopap',
   props: ['error'],
-  data () {
-    return {
-     
-    }
-  },
   methods:{
     goHome(){
       this.$router.push( {path:'/'})
     }
-  },
- 
-  components:{
-    // CreateShow
   },
 }
 </script>
@@ -36,22 +23,32 @@ export default {
   @import './mixins.scss';
 
   .conteiner{
-    width: 300px;
-    height: 300px;
-    background-color: $main-blue;
-    color: white;
-
+    width: 350px;
+    height: 350px;
+    background: url('../assets/pop-bg.png') top / cover no-repeat;
+    color: black;
+    font-size: 25px;
+    text-align: center;
   }
-
+  .bold{
+    font-weight: 900;
+  }
   .button-back{
-    width: 150px;
-    height: 40px;
-    color: white;
-    background-color: $main-blue;
+    width: 180px;
+    height: 50px;
     border: none;
-    cursor: pointer;
-    opacity: 0.8;
-    margin-left: 5px;
-    margin: 40px 0px 0px 70px;
+    background-color: $main-red;
+    color: white;
+    font-weight: 600;
+    font-size: 16px;
+    transition: all 1s;
+    margin-top: 80px;
+    margin-left: 80px;
+    box-shadow: 0px 5px 10px rgba(0,0,0,0.3);
   }
+
+  .button-back:hover{
+    cursor: pointer;
+  }
+    
 </style>

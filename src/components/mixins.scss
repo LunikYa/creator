@@ -1,3 +1,9 @@
+$main-black: #000;
+$main-red: #a60000;
+$main-red-active: #8f0000;
+$main-grey: #d7d7d7;
+$main-dark-grey: #424242;
+
 $main-blue: #0076a3;
 $background-blue: #cce4ed;
 $background-grey: #ebebeb;
@@ -7,9 +13,20 @@ $background-grey: #ebebeb;
   padding: 0;
   margin: 0;
   outline: none;
+  transition: all 0.5s;
 }
 
+html{
+  
+  height: 100%;
+}
+button:hover{
+  box-shadow: 0 0 20px rgba(0,0,0,0.5);
+}
+
+
 body{
-  background-color: $background-blue;
+  background: url('http://i.piccy.info/i9/4f9e84489d1ee86ac5f16e34ab0077bb/1520981407/39565/1228984/mainbg.jpg')  top / cover no-repeat;
+  width: 100%;
   height: 100%;
 }
