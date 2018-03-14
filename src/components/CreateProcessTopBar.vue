@@ -8,8 +8,8 @@
           <img src="../assets/eye-off.svg" alt="preview off" v-show="!preview" @click="invertPreview(), sendEmitPrev()" class="icon-prev">
           <button class="button-back" @click="sendForm()">SAVE</button><br/>
         </div>
+      </div>
     </div>
-  </div>
   </div>
 </template>
 

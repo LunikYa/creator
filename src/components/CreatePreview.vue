@@ -37,9 +37,6 @@ export default {
       myname: '',
     }
   },
-  computed:{
-
-  },
   methods: {
     names(item){
       this.myname = item.questions
@@ -74,12 +71,12 @@ export default {
   .content{
     margin-left: 20px;
     margin-bottom: 80px;
-
   }
 
   .conteiner-questions{
     margin-bottom: 10px;
   }
+
   .discription{
     text-align: center;
     font-style: italic;
@@ -124,7 +121,7 @@ export default {
    border-bottom: 1px solid grey;
    transition: border 1s;
    color: black;
-  width: 600px;
+   width: 600px;
    height: 50px;
  }
 

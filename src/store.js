@@ -37,14 +37,14 @@ export default new Vuex.Store({
           firebase.database().ref('forms/').on('value', 
             function(snapshot){
               context.commit('addNewForm', snapshot.val())
-            })
+          })
         })
     },
     pullForms(context, newval){
       firebase.database().ref('forms/').on('value', 
         function(snapshot){        
           context.commit('addNewForm', snapshot.val())
-        })
+      })
     }
   }
 })
