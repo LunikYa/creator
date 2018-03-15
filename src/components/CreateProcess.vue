@@ -22,9 +22,9 @@
       </div>
 
     <div class="title-group">
-      <label><input type="text" placeholder="Discription for you form" class="default-input" v-model="newForm.discription"></input></label>
+      <label><input type="text" placeholder="Description for you form" class="default-input" v-model="newForm.discription"></input></label>
       <transition-group name="back-log">
-        <p v-show="newForm.discription!==''" key='1' class="text-under-input">Discription for you form</p>     
+        <p v-show="newForm.discription!==''" key='1' class="text-under-input">Description for you form</p>     
       </transition-group>
     </div>      
  

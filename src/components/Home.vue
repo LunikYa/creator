@@ -5,6 +5,7 @@
       <button @click="goCreate" class="button-create">Create new form</button>
       <button @click="goLists" class="button-lists">Go to lists</button>   
     </div>
+    
   </div> 
 </template>
 

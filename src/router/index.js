@@ -6,6 +6,8 @@ import Create 				from '../components/Create.vue'
 import CreatePreview 	from '../components/CreatePreview.vue'
 import CreateProcess 	from '../components/CreateProcess.vue'
 import ListsOfForm 		from '../components/ListsOfForm.vue'
+import HomeLogin      from '../components/HomeLogin.vue'
+import HomeRegister   from '../components/HomeRegister.vue'
 
 Vue.use(Router)
 
@@ -21,6 +23,16 @@ export default new Router({
       path: '/lists',
       name: 'Lists',
       component: ListsOfForm 
+    },
+    {
+      path: '/register',
+      name: 'Register',
+      component: HomeRegister,
+    },
+    {
+      path: '/login',
+      name: 'Login',
+      component: HomeLogin,
     },
   	{
       path: '/create',

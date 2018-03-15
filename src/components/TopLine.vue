@@ -5,6 +5,9 @@
       <span>Home</span>
     </div>
     <h1 class="logo">MegaCreator</h1>
+    <button @click="goLogin">LOG IN</button>
+    <button @click="goRegister">REGISTER</button>
+    
   </div>
 </template>
 
@@ -18,8 +21,14 @@ export default {
   },
   methods: {
      goHome(){
-      console.log(this.$route.name)
+      // console.log(this.$route.name)
       this.$router.push( {path:'/'})
+    },
+    goLogin(){
+      this.$router.push( {path:'/login'})
+    },
+    goRegister(){
+      this.$router.push( {path:'/register'})
     }
   },
   computed:{
