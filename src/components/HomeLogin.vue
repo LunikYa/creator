@@ -4,8 +4,9 @@
     <img src="../assets/favicon.png" height="32" width="32" alt="">
     <form action="" @submit.prevent="login">
       <input type="email" placeholder="Enter you mail" v-model="user.email">
-      <input type="password" placeholder="Enter you password" v-model="user.password">     
-      <button type="submit" class="button">LOGIN</button>
+      <input type="password" placeholder="Enter you password" v-model="user.password">
+      <p v-show="err">{{msgError}}</p>     
+      <button type="submit" class="button-save">LOGIN</button>
     </form>
   </div>
 </template>
@@ -21,7 +22,8 @@ export default {
         password: '',
       },
 
-      error: false
+      err: false,
+      msgError: ''
     }
   },
   methods: {
@@ -29,19 +31,34 @@ export default {
       firebase.auth().signInWithEmailAndPassword(this.user.email, this.user.password)
       .then(resolve =>{
         this.$router.push( {path:'/'})
-      })
+      },
+        reject =>{
+          this.err = true;
+          console.log(reject);
+          this.msgError = reject.code
+        })
       .catch(function(error) {
+        // console.log(this);
             // Handle Errors here.
-            var errorCode = error.code;
-            var errorMessage = error.message;
+            // var errorCode = error.code;
+            this.msgError = error.message;
+            this.error = true;
             // ...
       });
+  },
+  validPass(){
+
   }
-  }
+  },
+   created(){
+      this.$root.$store.dispatch('getCurrentId');
+    }
 }
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
+@import './mixins.scss';
+
   .login{
     width: 400px;
     height: 400px;
@@ -68,14 +85,17 @@ export default {
     text-align: left;
   }
 
-  .button{
-    width: 150px;
-    height: 40px;
-    color: white;
-    background-color: rgba(0, 119, 177, 0.6);
+  .button-save{
+    width: 180px;
+    height: 50px;
     border: none;
     cursor: pointer;
-    opacity: 0.8;
-    margin-top: 15px
+    background-color: $main-red;
+    color: white;
+    font-weight: 600;
+    font-size: 16px;
+    transition: all 1s;
+    box-shadow: 0px 5px 10px rgba(0,0,0,0.3);
   }
+
 </style>

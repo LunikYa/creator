@@ -5,10 +5,14 @@
     <form action="" @submit.prevent="regUser">
       <input type="email" placeholder="Enter you mail" v-model="user.email">
       <input type="password" placeholder="Enter you password" v-model="user.password">
-      <input type="password" placeholder="Repeat password" v-model="user.dblpass">
+      <input type="password" placeholder="Repeat password" v-model="dblpass">
       <div v-if="error">Ошибка ептить</div>
       <div v-if="success" @click="go">Молодчага зареган норм!</div>
-      <button type="submit" class="button">SIGN IN</button>
+        <ul class="errors">
+          <li v-show=" '!validation.name' ">Name cannot be empty.</li>
+          <li v-show=" '!validation.email' ">Please provide a valid email address.</li>
+        </ul>
+      <button type="submit" class="button-save">SIGN IN</button>
     </form>
     <!-- <ul is="transition-group">
     <li v-for="user in users" class="user" :key="user['.key']">
@@ -35,11 +39,10 @@ export default {
   name: 'HomeRegister',
   data () {
     return {
+      dblpass: '',
       user: {
-        name: '',
         email: '',
         password: '',
-        dblpass: ''
       },
       error: false,
       success: false
@@ -47,10 +50,12 @@ export default {
   },
   methods: {
     addUser: function () {
+      console.log(this.isValid);
       if (this.isValid) {
-        usersRef.push(this.newUser)
-        this.newUser.name = ''
-        this.newUser.email = ''
+        // console.log(this.isValid);
+        firebase.database().ref('users').push(this.user)
+        this.user.name = ''
+        this.user.email = ''
       }
     },
     removeUser: function (user) {
@@ -58,18 +63,27 @@ export default {
     },
 
     regUser(){  
-       if(this.user.password !== this.user.dblpass){
+       if(this.user.password !== this.dblpass){
              this.error = true  
-       } else{
+       } else if (this.isValid) {
         // console.log(firebase);
+
        firebase.auth().createUserWithEmailAndPassword(this.user.email, this.user.password)
         .then((resolve) =>{
           // this.$emit('reg','sign-in');
           this.success = true
+          this.$router.push( {path:'/login'})
         })
         .catch(error=>{
-           this.signError= true;
+           this.error= true;
         })
+
+      //   console.log(this.isValid);
+      // if (this.isValid) {
+      //   // console.log(this.isValid);
+      //   firebase.database().ref('users').push(this.user)
+      //   this.user.name = ''
+      //   this.user.email = ''
       }
     },
     go(){
@@ -78,22 +92,30 @@ export default {
   },
   computed: {
     validation: function () {
+// console.log(this.isValid);
       return {
-        name: !!this.newUser.name.trim(),
-        email: emailRE.test(this.newUser.email)
+
+        password: !!this.user.password.trim(),
+        email: emailRE.test(this.user.email)
       }
     },
     isValid: function () {
-      var validation = this.validation
+      console.log(this.validation);
+      let validation = this.validation
       return Object.keys(validation).every(function (key) {
         return validation[key]
       })
     }
   },
+  created(){
+      this.$root.$store.dispatch('getCurrentId');
+    }
+
 }
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
+@import './mixins.scss';
   .login{
     width: 400px;
     height: 400px;
@@ -121,15 +143,17 @@ export default {
     text-align: left;
   }
 
-  .button{
-    width: 150px;
-    height: 40px;
-    color: white;
-    background-color: rgba(0, 119, 177, 0.6);
+  .button-save{
+    width: 180px;
+    height: 50px;
     border: none;
     cursor: pointer;
-    opacity: 0.8;
-    margin-top: 15px
+    background-color: $main-red;
+    color: white;
+    font-weight: 600;
+    font-size: 16px;
+    transition: all 1s;
+    box-shadow: 0px 5px 10px rgba(0,0,0,0.3);
   }
 
 
@@ -168,52 +192,3 @@ ul {
 
 
 </style>
-
-var emailRE = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
-var usersRef = firebase.database().ref('users')
-
-// create Vue app
-var app = new Vue({
-  // element to mount to
-  el: '#app',
-  // initial data
-  data: {
-    newUser: {
-      name: '',
-      email: ''
-    }
-  },
-  // firebase binding
-  // https://github.com/vuejs/vuefire
-  firebase: {
-    users: usersRef
-  },
-  // computed property for form validation state
-  computed: {
-    validation: function () {
-      return {
-        name: !!this.newUser.name.trim(),
-        email: emailRE.test(this.newUser.email)
-      }
-    },
-    isValid: function () {
-      var validation = this.validation
-      return Object.keys(validation).every(function (key) {
-        return validation[key]
-      })
-    }
-  },
-  // methods
-  methods: {
-    addUser: function () {
-      if (this.isValid) {
-        usersRef.push(this.newUser)
-        this.newUser.name = ''
-        this.newUser.email = ''
-      }
-    },
-    removeUser: function (user) {
-      usersRef.child(user['.key']).remove()
-    }
-  }
-})

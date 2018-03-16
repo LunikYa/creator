@@ -78,6 +78,7 @@ export default {
         discription: '',
         questions:[],
         preview: false,
+        uid: ''
       }
     }
   },
@@ -145,6 +146,9 @@ export default {
       CreateProcessTopBar,
       CreateProcessAddQuestions
     },
+    created(){
+      this.$root.$store.dispatch('getCurrentId');
+    }
 }
 
 </script>

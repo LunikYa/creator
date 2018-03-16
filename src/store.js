@@ -11,6 +11,7 @@ export default new Vuex.Store({
       password: '',
       dblpass: ''
     },
+    currentId: '',
     forms: []
   },
 
@@ -20,12 +21,25 @@ export default new Vuex.Store({
       for(let key in newval){
         state.forms.push(newval[key])
       }
+    },
+    addCurrentId(state, newval){
+      // console.log(newval);
+      state.currentId = newval;
+      // console.log(state.currentId);
     }    
   },
   actions: {
     pushFormsToData(context, obj) {
       // localStorage.setItem('arrayOfForms', JSON.stringify(obj))
-       firebase.database().ref('forms/' + obj.title+obj.discription.length)
+      firebase.auth().onAuthStateChanged(function(user) {
+      if (user) {
+        // console.log(user, user.uid);
+        console.log(context.currentId)
+        context.commit('addCurrentId', user.uid)
+
+      
+        console.log(context.currentId);
+       firebase.database().ref('users/' + user.uid + '/forms/' + obj.title)
        .set({
           title:       obj.title,
           discription: obj.discription,
@@ -34,17 +48,31 @@ export default new Vuex.Store({
         })
        .then(resolve =>
        {
-          firebase.database().ref('forms/').on('value', 
+          firebase.database().ref('forms/'+ user.uid).on('value', 
             function(snapshot){
               context.commit('addNewForm', snapshot.val())
           })
-        })
+        })}})
+    },
+    getCurrentId(context){
+      firebase.auth().onAuthStateChanged(function(user) {
+      if (user) {
+
+        context.commit('addCurrentId', user.uid)
+
+      }})
     },
     pullForms(context, newval){
-      firebase.database().ref('forms/').on('value', 
+      firebase.auth().onAuthStateChanged(function(user) {
+      if (user) {
+      firebase.database().ref('users/'+ user.uid + '/forms').on('value', 
         function(snapshot){        
           context.commit('addNewForm', snapshot.val())
       })
-    }
-  }
-})
+      }else{
+        firebase.database().ref().off()
+          alert("Пользователь не зареган")
+      }
+      })}}
+  })
+

@@ -25,7 +25,8 @@ export default {
   name: 'ListsOfForm',
   data () {
     return {
-      copyForms: []
+      copyForms: [],
+      userId: '',
     }
   },
   components:{
@@ -41,7 +42,7 @@ export default {
       return this.$root.$store.state.forms
     }    
   },
-  created: function(){    
+  created: function(){
     this.$root.$store.dispatch('pullForms')
     this.copyForms = JSON.parse(JSON.stringify(this.$root.$store.state.forms))   
   }

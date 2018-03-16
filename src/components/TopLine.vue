@@ -5,9 +5,11 @@
       <span>Home</span>
     </div>
     <h1 class="logo">MegaCreator</h1>
-    <button @click="goLogin">LOG IN</button>
-    <button @click="goRegister">REGISTER</button>
-    
+    <div class="box-button">
+      <button @click="goLogin" class="button-login">LOG IN</button>
+      <button @click="goRegister" class="button-login">REGISTER</button>
+      <button @click="out">Выйти</button>
+    </div>
   </div>
 </template>
 
@@ -29,6 +31,9 @@ export default {
     },
     goRegister(){
       this.$router.push( {path:'/register'})
+    },
+    out(){
+     console.log(5); 
     }
   },
   computed:{
@@ -59,10 +64,9 @@ export default {
   }
 
   .conteiner-go-home{
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
-    position: absolute;
+    float: left;
+    vertical-align: middle;
+    // position: absolute;
     margin-top: 20px;
     width: 100px;
     opacity: 0.8;
@@ -77,4 +81,19 @@ export default {
     opacity: 1;
     cursor: pointer;
   }
+
+ .button-login{
+  padding: 15px 40px;
+  border: 1px solid #fff;
+  barder-radius: 5px;
+  background: transparent;
+  float: right;
+  margin-top: -40px;
+  margin-right: 20px;
+  color: #fff;
+ }
+.button-login:hover{
+  cursor: pointer;
+  border: 1px solid $main-red;
+}
 </style>
