@@ -8,11 +8,11 @@
       <input type="password" placeholder="Repeat password" v-model="dblpass">
       <div v-if="error">Ошибка ептить</div>
       <div v-if="success" @click="go">Молодчага зареган норм!</div>
-        <ul class="errors">
-          <li v-show=" '!validation.name' ">Name cannot be empty.</li>
-          <li v-show=" '!validation.email' ">Please provide a valid email address.</li>
-        </ul>
-      <button type="submit" class="button-save">SIGN IN</button>
+        
+          <p v-show=" !validation.password ">Name cannot be empty.</p>
+          <p v-show=" !validation.email ">Please provide a valid email address.</p>
+        
+      <button type="submit" class="button-save">Register</button>
     </form>
     <!-- <ul is="transition-group">
     <li v-for="user in users" class="user" :key="user['.key']">
@@ -92,7 +92,7 @@ export default {
   },
   computed: {
     validation: function () {
-// console.log(this.isValid);
+      // console.log(this.isValid);
       return {
 
         password: !!this.user.password.trim(),

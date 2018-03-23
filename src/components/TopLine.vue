@@ -5,11 +5,10 @@
       <span>Home</span>
     </div>
     <h1 class="logo">MegaCreator</h1>
-    <div class="box-button">
-      <button @click="goLogin" class="button-login">LOG IN</button>
-      <button @click="goRegister" class="button-login">REGISTER</button>
+    <!-- <div class="box-button">
+      
       <button @click="out">Выйти</button>
-    </div>
+    </div> -->
   </div>
 </template>
 
@@ -26,12 +25,12 @@ export default {
       // console.log(this.$route.name)
       this.$router.push( {path:'/'})
     },
-    goLogin(){
-      this.$router.push( {path:'/login'})
-    },
-    goRegister(){
-      this.$router.push( {path:'/register'})
-    },
+    // goLogin(){
+    //   this.$router.push( {path:'/login'})
+    // },
+    // goRegister(){
+    //   this.$router.push( {path:'/register'})
+    // },
     out(){
      console.log(5); 
     }
@@ -94,6 +93,7 @@ export default {
  }
 .button-login:hover{
   cursor: pointer;
+  background: $main-red;
   border: 1px solid $main-red;
 }
 </style>

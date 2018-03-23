@@ -7,8 +7,9 @@ export default new Vuex.Store({
   state: {
     count: 0,
     user: {
-      email:'myemail',
+      email:'',
       password: '',
+      uid:'',
       dblpass: ''
     },
     currentId: '',
@@ -26,6 +27,10 @@ export default new Vuex.Store({
       // console.log(newval);
       state.currentId = newval;
       // console.log(state.currentId);
+    },
+    addCurrentUser(state, newUser){
+      state.user.email = newUser.email
+      state.user.uid = newUser.uid
     }    
   },
   actions: {
@@ -33,7 +38,7 @@ export default new Vuex.Store({
       // localStorage.setItem('arrayOfForms', JSON.stringify(obj))
       firebase.auth().onAuthStateChanged(function(user) {
       if (user) {
-        // console.log(user, user.uid);
+        console.log(user, user.uid);
         console.log(context.currentId)
         context.commit('addCurrentId', user.uid)
 
@@ -57,7 +62,7 @@ export default new Vuex.Store({
     getCurrentId(context){
       firebase.auth().onAuthStateChanged(function(user) {
       if (user) {
-
+        console.log('sdsd', user.uid);
         context.commit('addCurrentId', user.uid)
 
       }})
@@ -72,7 +77,9 @@ export default new Vuex.Store({
       }else{
         firebase.database().ref().off()
           alert("Пользователь не зареган")
+          this.$root.$route.push({path: '/'})
       }
       })}}
   })
+
 

@@ -1,21 +1,29 @@
 <template>
   <div class="wrapp">
     <p class="welcome">Welcome to Creator</p>
-    <div v-show="showButtons"> 
+    
+    <div v-if="!!currentUser.email">
+        <button @click="goLogin" class="button-create">LOG IN</button>
+        <button @click="goRegister"  class="button-lists">REGISTER</button>
+    </div>
+    <div v-else> 
       <button @click="goCreate" class="button-create">Create new form</button>
       <button @click="goLists" class="button-lists">Go to lists</button>   
     </div>
-    
   </div> 
 </template>
 
 <script>
-
+window.currentUser = {
+      email: ''
+     }
 export default {
   name: 'home',
   data() {
     return {
-     
+     currentUser: {
+      email: ''
+     }
     }
   },
   methods:{    
@@ -24,12 +32,31 @@ export default {
     },
     goLists(){
       this.$router.push( {path:'/lists'})
+    },
+    goLogin(){
+      this.$router.push( {path:'/login'})
+    },
+    goRegister(){
+      this.$router.push( {path:'/register'})
+    },
+    plum(){
+      firebase.auth().onAuthStateChanged(function(user) {
+  if (user) {
+    console.log(window.currentUser, user);
+    currentUser = user.email
+  } else {
+    this.$router.push( {path:'/login'})
+  }
+    });
     }
    },
   computed: {
     showButtons(){
       return this.$route.name == 'Home';
     }
+  },
+  mounted(){
+      this.plum()
   } 
 }
 </script>
@@ -63,6 +90,22 @@ export default {
   background-color: $main-dark-grey;
   color: white; 
   margin-left: 40px;
+}
+
+.button-login{
+  padding: 15px 40px;
+  border: 1px solid #fff;
+  barder-radius: 5px;
+  background: transparent;
+  float: right;
+  margin-top: -40px;
+  margin-right: 20px;
+  color: #fff;
+ }
+.button-login:hover{
+  cursor: pointer;
+  background: $main-red;
+  border: 1px solid $main-red;
 }
 
 .button-lists:hover{

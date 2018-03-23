@@ -30,6 +30,7 @@ export default {
     login(){
       firebase.auth().signInWithEmailAndPassword(this.user.email, this.user.password)
       .then(resolve =>{
+        console.log(resolve);
         this.$router.push( {path:'/'})
       },
         reject =>{
@@ -52,6 +53,7 @@ export default {
   },
    created(){
       this.$root.$store.dispatch('getCurrentId');
+      console.log('');
     }
 }
 </script>
