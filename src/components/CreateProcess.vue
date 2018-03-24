@@ -78,7 +78,6 @@ export default {
         discription: '',
         questions:[],
         preview: false,
-        uid: ''
       }
     }
   },
@@ -147,7 +146,7 @@ export default {
       CreateProcessAddQuestions
     },
     created(){
-      this.$root.$store.dispatch('getCurrentId');       
+    
       this.$root.$store.dispatch('pullForms')
     }
 }

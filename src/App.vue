@@ -15,6 +15,9 @@ export default {
   components: {
     Home,
     TopLine
+  },
+  created(){
+    this.$root.$store.dispatch('pullForms')
   }
 }
 </script>

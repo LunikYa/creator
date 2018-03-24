@@ -4,11 +4,11 @@
       <img src="../assets/back-home.svg" alt="go home">
       <span>Home</span>
     </div>
-    <h1 class="logo">MegaCreator {{this.$root.$store.state.user.email}}</h1>
-    <!-- <div class="box-button">
-      
-      <button @click="out">Выйти</button>
-    </div> -->
+    <h1 class="logo">MegaCreator</h1>
+    <div class="box-button">
+      {{this.$root.$store.state.user.email}}
+      <button v-if="!!this.$root.$store.state.user.email" @click="out">Выйти</button>
+    </div>
   </div>
 </template>
 
@@ -34,7 +34,12 @@ export default {
     //   this.$router.push( {path:'/register'})
     // },
     out(){
-     console.log(5); 
+     firebase.auth().signOut().then(function() {
+        alert('Exit')
+         this.$root.$store.dispatch('pullForms')
+      }).catch(function(error) {
+        // An error happened.
+      });
     },
     getEmail(){
 
@@ -100,5 +105,10 @@ export default {
   cursor: pointer;
   background: $main-red;
   border: 1px solid $main-red;
+}
+
+.box-button{
+  float: right;
+  margin-top: -20px;
 }
 </style>

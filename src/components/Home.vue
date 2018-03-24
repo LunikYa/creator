@@ -1,10 +1,10 @@
 <template>
   <div class="wrapp">
-    <p class="welcome">Welcome to Creator</p>
+    <p class="welcome">{{(getUser.email) ? 'Welcome to Creator' : 'Log In or Register'}}</p>
     
-    <div v-if="!!currentUser.email">
-        <button @click="goLogin" class="button-create">LOG IN</button>
-        <button @click="goRegister"  class="button-lists">REGISTER</button>
+    <div v-if="!getUser.email">
+        <button @click="goLogin" class="button-log">LOG IN</button>
+        <button @click="goRegister"  class="button-log">REGISTER</button>
     </div>
     <div v-else> 
       <button @click="goCreate" class="button-create">Create new form</button>
@@ -43,6 +43,9 @@ export default {
   computed: {
     showButtons(){
       return this.$route.name == 'Home';
+    },
+    getUser(){
+      return this.$root.$store.state.user
     }
   },
   mounted(){
@@ -82,20 +85,19 @@ export default {
   margin-left: 40px;
 }
 
-.button-login{
-  padding: 15px 40px;
-  border: 1px solid #fff;
+.button-log{
+ @extend .button-create;
+  // border: 1px solid #fff;
   barder-radius: 5px;
-  background: transparent;
-  float: right;
-  margin-top: -40px;
-  margin-right: 20px;
+  background: black;
   color: #fff;
+  margin-right: 10px;
+  // border: 3px solid $main-red;
  }
-.button-login:hover{
+.button-log:hover{
   cursor: pointer;
-  background: $main-red;
-  border: 1px solid $main-red;
+  // background: $main-red;
+  // border: 1px solid $main-red;
 }
 
 .button-lists:hover{

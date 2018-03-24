@@ -12,7 +12,6 @@ export default new Vuex.Store({
       uid:'',
       forms: []
     },
-    currentId: '',
     forms: []
   },
 
@@ -62,9 +61,10 @@ export default new Vuex.Store({
           context.commit('addNewForm', snapshot.val())
       })
       }else{
+        context.commit('addCurrentUser', {email: '', uid: '', forms: []})
         firebase.database().ref().off()
           alert("Пользователь не зареган")
-          router.push({path: '/register'})
+          router.push({path: '/'})
       }
       })}}
   })

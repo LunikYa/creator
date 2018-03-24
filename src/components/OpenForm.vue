@@ -23,8 +23,6 @@
             </div>
          </div>
         </div>
-        <router-link :to= '"/"+ getId + "/" + form.title'>Open form </router-link>
-        <!-- <router-view :form="form"/> -->
      </form>
     </div>
   </div>
