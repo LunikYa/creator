@@ -1,5 +1,6 @@
 import Vue  from 'vue'
 import Vuex from 'vuex'
+import router from './router'
 
 Vue.use(Vuex)
 
@@ -8,9 +9,8 @@ export default new Vuex.Store({
     count: 0,
     user: {
       email:'',
-      password: '',
       uid:'',
-      dblpass: ''
+      forms: []
     },
     currentId: '',
     forms: []
@@ -18,15 +18,10 @@ export default new Vuex.Store({
 
   mutations: {
     addNewForm (state, newval) {
-      state.forms = [];
+      state.user.forms = [];
       for(let key in newval){
-        state.forms.push(newval[key])
+        state.user.forms.push(newval[key])
       }
-    },
-    addCurrentId(state, newval){
-      // console.log(newval);
-      state.currentId = newval;
-      // console.log(state.currentId);
     },
     addCurrentUser(state, newUser){
       state.user.email = newUser.email
@@ -35,16 +30,12 @@ export default new Vuex.Store({
   },
   actions: {
     pushFormsToData(context, obj) {
-      // localStorage.setItem('arrayOfForms', JSON.stringify(obj))
-      firebase.auth().onAuthStateChanged(function(user) {
-      if (user) {
-        console.log(user, user.uid);
-        console.log(context.currentId)
-        context.commit('addCurrentId', user.uid)
 
-      
-        console.log(context.currentId);
-       firebase.database().ref('users/' + user.uid + '/forms/' + obj.title)
+      firebase.auth().onAuthStateChanged(function(user) {
+
+      if (user) {
+        console.log(2, user, user.uid);
+           firebase.database().ref('users/' + user.uid + '/forms/' + obj.title)
        .set({
           title:       obj.title,
           discription: obj.discription,
@@ -53,31 +44,27 @@ export default new Vuex.Store({
         })
        .then(resolve =>
        {
-          firebase.database().ref('forms/'+ user.uid).on('value', 
+          console.log(resolve);
+          firebase.database().ref('users/' + 'forms/'+ user.uid).on('value', 
             function(snapshot){
               context.commit('addNewForm', snapshot.val())
           })
         })}})
     },
-    getCurrentId(context){
-      firebase.auth().onAuthStateChanged(function(user) {
-      if (user) {
-        console.log('sdsd', user.uid);
-        context.commit('addCurrentId', user.uid)
 
-      }})
-    },
     pullForms(context, newval){
       firebase.auth().onAuthStateChanged(function(user) {
       if (user) {
+         console.log('pullForms', user)
+         context.commit('addCurrentUser', user)        
       firebase.database().ref('users/'+ user.uid + '/forms').on('value', 
-        function(snapshot){        
+        function(snapshot){     
           context.commit('addNewForm', snapshot.val())
       })
       }else{
         firebase.database().ref().off()
           alert("Пользователь не зареган")
-          this.$root.$route.push({path: '/'})
+          router.push({path: '/register'})
       }
       })}}
   })

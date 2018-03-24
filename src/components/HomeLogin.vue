@@ -52,8 +52,8 @@ export default {
   }
   },
    created(){
-      this.$root.$store.dispatch('getCurrentId');
-      console.log('');
+      // this.$root.$store.dispatch('getCurrentId');
+      // console.log('');
     }
 }
 </script>

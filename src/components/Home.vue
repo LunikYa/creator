@@ -39,16 +39,6 @@ export default {
     goRegister(){
       this.$router.push( {path:'/register'})
     },
-    plum(){
-      firebase.auth().onAuthStateChanged(function(user) {
-  if (user) {
-    console.log(window.currentUser, user);
-    currentUser = user.email
-  } else {
-    this.$router.push( {path:'/login'})
-  }
-    });
-    }
    },
   computed: {
     showButtons(){
@@ -56,7 +46,7 @@ export default {
     }
   },
   mounted(){
-      this.plum()
+
   } 
 }
 </script>

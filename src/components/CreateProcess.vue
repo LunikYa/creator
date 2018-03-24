@@ -129,7 +129,7 @@ export default {
   },
   computed: {
     actualForms(){
-      return this.$root.$store.state.forms
+      return this.$root.$store.state.user.forms
     },
     showCountForms(){
       let count = this.newForm.questions.length 
@@ -147,7 +147,8 @@ export default {
       CreateProcessAddQuestions
     },
     created(){
-      this.$root.$store.dispatch('getCurrentId');
+      this.$root.$store.dispatch('getCurrentId');       
+      this.$root.$store.dispatch('pullForms')
     }
 }
 

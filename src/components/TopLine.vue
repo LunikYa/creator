@@ -4,7 +4,7 @@
       <img src="../assets/back-home.svg" alt="go home">
       <span>Home</span>
     </div>
-    <h1 class="logo">MegaCreator</h1>
+    <h1 class="logo">MegaCreator {{this.$root.$store.state.user.email}}</h1>
     <!-- <div class="box-button">
       
       <button @click="out">Выйти</button>
@@ -17,7 +17,9 @@ export default {
   name: 'TopLine',
   data () {
     return {
-
+      user: {
+        email: '',
+      }
     }
   },
   methods: {
@@ -33,6 +35,9 @@ export default {
     // },
     out(){
      console.log(5); 
+    },
+    getEmail(){
+
     }
   },
   computed:{

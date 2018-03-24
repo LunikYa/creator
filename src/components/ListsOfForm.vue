@@ -39,12 +39,12 @@ export default {
   },
   computed:{
     getArr(){
-      return this.$root.$store.state.forms
+      return this.$root.$store.state.user.forms
     }    
   },
   created: function(){
     this.$root.$store.dispatch('pullForms')
-    this.copyForms = JSON.parse(JSON.stringify(this.$root.$store.state.forms))   
+    this.copyForms = JSON.parse(JSON.stringify(this.$root.$store.state.user.forms))   
   }
 }
 </script>
